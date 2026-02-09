@@ -1,56 +1,13 @@
-if SHIELD_SNAKE_ADAPTER
+# ---------------------
+# Snake Dongle
+# ---------------------
 
-config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING
-    default y
+if SHIELD_MELIOR_CENTRAL_SNAKE
 
-config ZMK_DISPLAY
-   default y
+config ZMK_KEYBOARD_NAME
+    default "Melior"
 
-choice ZMK_DISPLAY_STATUS_SCREEN
-    default ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
-endchoice
-
-config ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
-    select LV_USE_LABEL
-    select LV_USE_BAR
-    select LV_USE_FLEX
-    select LV_USE_ROLLER
-    select LV_COLOR_SCREEN_TRANSP
-    select ZMK_WPM
-
-choice ZMK_DISPLAY_WORK_QUEUE
-    default ZMK_DISPLAY_WORK_QUEUE_DEDICATED
-endchoice
-
-config ZMK_DISPLAY_DEDICATED_THREAD_STACK_SIZE
-    default 4096
-
-choice ST7789V_PIXEL_FORMAT
-	default ST7789V_RGB565
-endchoice
-
-config LV_Z_VDB_SIZE
-    default 50
-
-config LV_Z_MEM_POOL_SIZE
-    default 10000
-
-config LV_DPI_DEF
-    default 261
-
-config LV_Z_BITS_PER_PIXEL
-	default 16
-
-choice LV_COLOR_DEPTH
-	default LV_COLOR_DEPTH_16
-endchoice
-
-config LV_COLOR_16_SWAP
-	default n
-
-choice LV_FONT_DEFAULT
-    default LV_FONT_DEFAULT_MONTSERRAT_20
-endchoice
+if ZMK_BACKLIGHT
 
 config PWM
     default y
@@ -58,4 +15,41 @@ config PWM
 config LED_PWM
     default y
 
-endif
+endif # ZMK_BACKLIGHT
+
+config ZMK_POINTING
+    default y
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+choice ZMK_DISPLAY_STATUS_SCREEN
+    default ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+endchoice
+
+config ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+    select ZMK_WPM
+    imply ZMK_HID_INDICATORS
+
+choice ZMK_DISPLAY_WORK_QUEUE
+    default ZMK_DISPLAY_WORK_QUEUE_DEDICATED
+endchoice
+
+config LV_Z_VDB_SIZE
+	default 64
+    
+config LV_DPI_DEF
+    default 148
+
+config LV_Z_BITS_PER_PIXEL
+    default 16
+
+choice ST7789V_PIXEL_FORMAT
+    default ST7789V_RGB565
+endchoice
+
+choice LV_COLOR_DEPTH
+    default LV_COLOR_DEPTH_16
+endchoice
+
+endif # Snake Dongle
