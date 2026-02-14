@@ -31,7 +31,6 @@ static struct output_status_state status_state;
 static uint16_t *scaled_bitmap_status;
 static uint16_t *scaled_bitmap_symbol;
 static uint16_t *scaled_bitmap_bt_num;
-static int widget_output_status_init();
 
 static const uint16_t status_height = 9;
 static const uint16_t status_width = 9;
@@ -200,18 +199,13 @@ void print_bitmap_status(uint16_t *scaled_bitmap, Status s, uint16_t x, uint16_t
 }
 
 static struct output_status_state get_state(const zmk_event_t *_eh) {
-    struct output_status_state state;
-
-    // Assign the struct first to handle the union correctly
-    state.selected_endpoint = zmk_endpoint_get_selected();
-    
-    // Assign the remaining fields
-    state.active_profile_index = zmk_ble_active_profile_index();
-    state.active_profile_connected = zmk_ble_active_profile_is_connected();
-    state.active_profile_bonded = !zmk_ble_active_profile_is_open();
-    state.usb_is_hid_ready = zmk_usb_is_hid_ready();
-
-    return state;
+    return (struct output_status_state){
+        .selected_endpoint = zmk_endpoint_selected(),
+        .active_profile_index = zmk_ble_active_profile_index(),
+        .active_profile_connected = zmk_ble_active_profile_is_connected(),
+        .active_profile_bonded = !zmk_ble_active_profile_is_open(),
+        .usb_is_hid_ready = zmk_usb_is_hid_ready()
+    };
 }
 
 void print_bluetooth_status(uint16_t x, uint16_t y, struct output_status_state state) {
