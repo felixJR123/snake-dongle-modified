@@ -31,6 +31,7 @@ static struct output_status_state status_state;
 static uint16_t *scaled_bitmap_status;
 static uint16_t *scaled_bitmap_symbol;
 static uint16_t *scaled_bitmap_bt_num;
+static int widget_output_status_init();
 
 static const uint16_t status_height = 9;
 static const uint16_t status_width = 9;
