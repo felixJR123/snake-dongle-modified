@@ -1,8 +1,5 @@
 if SHIELD_SNAKE_ADAPTER
 
-config ZMK_ENDPOINTS
-    default y
-
 config ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING
     default y
 
